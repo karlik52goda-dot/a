@@ -1,123 +1,147 @@
-body {
-  font-family: 'Comic Sans MS', sans-serif;
-  background: linear-gradient(to bottom, #001530, #000022);
-  color: #fff;
-  margin: 0;
+/* Переменные для удобной настройки цветов на GitHub */
+:root {
+  --main-bg: linear-gradient(to bottom, #001530, #000022);
+  --header-bg: #380dad;
+  --accent-pink: #ff77aa;
+  --accent-purple: #a24fff;
+  --block-bg: #02004d;
+  --block-border: #6044f7;
+  --text-main: #fff;
+  --text-dim: #dbd8ff;
 }
 
+* {
+  box-sizing: border-box; /* Чтобы паддинги не взрывали верстку */
+}
+
+body {
+  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+  background: var(--main-bg);
+  background-attachment: fixed; /* Градиент не рвется при скролле */
+  color: var(--text-main);
+  margin: 0;
+  overflow-x: hidden; /* Защита от горизонтального скролла на мобилках */
+}
+
+/* --- HEADER --- */
 .header {
-  background-color: #380dad;
+  background-color: var(--header-bg);
   text-align: center;
-  padding: 40px;
+  padding: 40px 20px;
   box-shadow: 0 5px 25px rgba(0,0,0,0.6);
 }
 
 .header h1 {
-  font-size: 42px;
+  font-size: clamp(28px, 5vw, 42px); /* Адаптивный размер шрифта */
   margin: 0;
   animation: glow 2s infinite alternate;
 }
 
-.header p {
-  font-size: 18px;
-  margin: 12px 0 20px 0;
-}
-
 @keyframes glow {
-  from { text-shadow: 0 0 5px #ff77aa; }
+  from { text-shadow: 0 0 5px var(--accent-pink); }
   to { text-shadow: 0 0 20px #ff55ff; }
 }
 
 .nav {
-  margin-top: 20px;
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap; /* Кнопки переносятся на новый ряд, если мало места */
+  justify-content: center;
+  gap: 10px;
 }
 
 .nav a {
   text-decoration: none;
   color: #ffe0ff;
-  margin: 0 14px;
   font-weight: bold;
   padding: 10px 16px;
   border-radius: 10px;
-  transition: 0.3s;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .nav a:hover {
-  background-color: #a24fff;
-  transform: scale(1.05);
+  background-color: var(--accent-purple);
+  transform: translateY(-3px) scale(1.05);
 }
 
+/* --- CONTENT --- */
 .banner-box {
   margin-top: 25px;
+  padding: 0 15px;
 }
 
 .banner {
   width: 100%;
   max-width: 950px;
+  height: auto;
   border-radius: 15px;
-  border: 3px solid #ff55aa;
-  box-shadow: 0 0 25px rgba(255,85,170,0.5);
-  transition: transform 0.4s;
-}
-
-.banner:hover {
-  transform: scale(1.02);
+  border: 3px solid var(--accent-pink);
+  box-shadow: 0 0 25px rgba(255,85,170,0.4);
+  transition: 0.4s;
 }
 
 .content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 35px;
-  padding: 35px;
+  display: grid; /* Сетка лучше флексов для GitHub репозиториев */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
 .block {
-  background-color: #02004d;
-  border: 3px solid #6044f7;
+  background-color: var(--block-bg);
+  border: 3px solid var(--block-border);
   border-radius: 18px;
-  width: 360px;
   padding: 25px;
   text-align: center;
-  transition: 0.5s;
-  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  transition: 0.4s ease;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .block:hover {
-  transform: scale(1.07) rotate(-1deg);
-  border-color: #ff77aa;
-  box-shadow: 0 0 40px rgba(255,119,170,0.7);
+  transform: translateY(-10px) rotate(-1deg);
+  border-color: var(--accent-pink);
+  box-shadow: 0 0 40px rgba(255,119,170,0.6);
 }
 
 .block h2 {
   color: #ffccff;
-  font-size: 26px;
-  margin-bottom: 15px;
+  font-size: 24px;
+  margin: 0 0 15px 0;
 }
 
 .block p {
   font-size: 16px;
-  color: #dbd8ff;
+  color: var(--text-dim);
   line-height: 1.6;
 }
 
 .block img {
   width: 100%;
-  border-radius: 14px;
-  border: 3px solid #8655f7;
-  margin-top: 18px;
-  transition: transform 0.4s;
+  height: 180px; /* Фиксируем высоту для ровных карточек */
+  object-fit: cover; /* Картинки не растягиваются, а обрезаются */
+  border-radius: 12px;
+  border: 2px solid var(--block-border);
+  margin-top: auto;
+  transition: 0.3s;
 }
 
-.block img:hover {
-  transform: scale(1.05);
-}
-
+/* --- FOOTER --- */
 .footer {
   background-color: #6a0dad;
-  padding: 30px;
+  padding: 40px 20px;
   text-align: center;
   font-size: 14px;
-  color: white;
-  box-shadow: 0 -5px 25px rgba(0,0,0,0.6);
+  border-top: 2px solid var(--accent-pink);
+}
+
+/* Для совсем маленьких экранов */
+@media (max-width: 480px) {
+  .header h1 { font-size: 24px; }
+  .content { padding: 20px 10px; }
 }
